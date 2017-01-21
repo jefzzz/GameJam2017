@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour {
     private float jumpReset = 1.25f;
 
 	void Start () {
-        rigid = this.GetComponent<Rigidbody>();
 	}
 	
 	void FixedUpdate () {
@@ -28,11 +27,11 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rigid.AddForce(this.transform.forward * forwardScale * Time.deltaTime);
+            rigid.AddForce(this.transform.forward * forwardScale * Time.deltaTime * -1);
         }
         if(Input.GetKey(KeyCode.S))
         {
-            rigid.AddForce(this.transform.forward * forwardScale * Time.deltaTime * -1);
+            rigid.AddForce(this.transform.forward * forwardScale * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A))
         {
