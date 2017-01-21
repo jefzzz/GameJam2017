@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour {
         float posX = Random.Range(-size, size);
         float posZ = Random.Range(-size, size);
         float index = Random.Range(0, food.Length - 1);
-        GameObject go = (GameObject)Instantiate(food[(int)index], new Vector3(posX, 1.4f, posZ), Quaternion.identity);
+        GameObject go = (GameObject)Instantiate(food[(int)index], new Vector3(posX, 0f, posZ), Quaternion.identity);
     }
 
 }

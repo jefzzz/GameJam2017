@@ -44,7 +44,7 @@ public class FoodMovement : MonoBehaviour
     void runaway()
     {
         anim.SetBool("isWalk", true);
-        transform.position = Vector3.MoveTowards(transform.position, player.position, -1f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, player.position, -0.8f * Time.deltaTime);
     }
 
     void patrol()
