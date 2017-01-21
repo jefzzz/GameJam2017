@@ -12,16 +12,15 @@ public class Shooter : MonoBehaviour {
     public float targetVel = 1000f;
 
     private bool isOpen = false;
-    private JointMotor motor;
+    private HingeJoint hinge;
 
     // Use this for initialization
     void Start () {
-        anim = GetComponent<Animator>();
-        motor = door.GetComponent<HingeJoint>().motor;
+        hinge = door.GetComponent<HingeJoint>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if(Input.GetKeyDown(KeyCode.LeftControl))
         {
             shoot();
@@ -45,15 +44,16 @@ public class Shooter : MonoBehaviour {
 
     void openDoor()
     {
-        print(isOpen);
+        JointMotor motor = hinge.motor;
         if (!isOpen)
         {
             motor.targetVelocity = targetVel;
-            print(motor.targetVelocity);
+            hinge.motor = motor;
             isOpen = true;
         } else
         {
             motor.targetVelocity = targetVel * -1;
+            hinge.motor = motor;
             isOpen = false;
         }
         //anim.SetBool("isOpen", !anim.GetBool("isOpen"));
