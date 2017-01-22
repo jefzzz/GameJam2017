@@ -10,14 +10,16 @@ public class GameManager : MonoBehaviour {
     public float timer = 60;
     public Text timerText;
     public Text announceText;
-
+    public PlayerMovement player;
     public bool isPause = false;
+    public GameObject startOverUI;
     
 
 	// Use this for initialization
 	void Start () {
         announceLevel();
         spawner = FindObjectOfType<Spawner>();
+        player = FindObjectOfType<PlayerMovement>();
 	}
 
     void Update()
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour {
         {
             return;
         }
+        
         if(timer <= 0)
         {
             announceLevel();
@@ -36,6 +39,12 @@ public class GameManager : MonoBehaviour {
             timer -= Time.deltaTime;
         }
         timerText.text = "Timer " + timer.ToString("F2");
+        print(player.transform.position);
+        if (player.transform.position.y < -1)
+        {
+            gameOver();
+            return;
+        }
     }
 
     public void announceLevel()
@@ -95,6 +104,18 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(enemy);
         }
+    }
+
+    public void gameOver()
+    {
+        announceText.text = "GAME OVER NOOB";
+        announceText.gameObject.SetActive(true);
+        startOverUI.SetActive(true);
+    }
+
+    public void startOver()
+    {
+        //return to title screen
     }
 	
 	
