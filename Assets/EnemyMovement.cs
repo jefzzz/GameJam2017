@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
     private Rigidbody rigid;
-    private Animator anim;
     private Transform player;
     private Shooter shooter;
     private GameManager manager;
 
+    public float jumpPower = 500;
+
+    public bool shrinking = false;
+
+    public bool isGrounded = true;
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
         player = FindObjectOfType<PlayerMovement>().transform;
         shooter = FindObjectOfType<Shooter>();
         manager = FindObjectOfType<GameManager>();
-        anim.SetBool("isWalk", true);
 
 	}
 	
@@ -26,13 +28,17 @@ public class EnemyMovement : MonoBehaviour {
         {
             return;
         }
+        if(shrinking)
+        {
+            shrink();
+        }
         //moveForward();
         if (Input.GetKeyDown(KeyCode.P))
         {
             //anim.SetTrigger("isHop");
         }
         Vector3 diff = this.transform.position - player.position;
-        if (diff.magnitude < 20)
+        if (diff.magnitude < 20 && isGrounded)
         {
             chase();
         }
@@ -46,9 +52,11 @@ public class EnemyMovement : MonoBehaviour {
     void chase()
     {
         //Vector3 direction = transform.position - player.position;
+        isGrounded = false;
         Vector3 direction = player.position - transform.position;
-        rigid.AddForce(direction.normalized * 100f * Time.deltaTime);
-        this.transform.LookAt(player);
+        rigid.AddForce(direction.normalized * 1000f * Time.deltaTime);
+        rigid.AddForce(Vector3.up * jumpPower);
+        //this.transform.LookAt(player);
         //transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime);
     }
 
@@ -57,8 +65,24 @@ public class EnemyMovement : MonoBehaviour {
         print(other.gameObject.tag);
         if(other.gameObject.tag == "door" && shooter.attackAnimation)
         {
-            Destroy(this.gameObject, 0.5f);
+            Vector3 direction = player.position - transform.position;
+            rigid.AddForce(-direction * 100f);
+            rigid.AddForce(Vector3.up * 100f);
+            shrinking = true;
         }
+        if(other.gameObject.tag == "kitchen")
+        {
+            isGrounded = true;
+        }
+    }
+
+    void shrink ()
+    {
+        if (this.transform.localScale.x < 0.2f)
+        {
+            Destroy(this.gameObject);
+        }
+        this.transform.localScale -= new Vector3(1f, 1f, 1f) * Time.deltaTime; 
     }
 
     

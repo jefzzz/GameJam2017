@@ -5,15 +5,16 @@ using UnityEngine;
 public class FoodMovement : MonoBehaviour
 {
     private Rigidbody rigid;
-    private Animator anim;
     private Transform player;
     private GameManager manager;
+    public bool isGrounded = true;
+    public float jumpPower = 50f;
+    public float runPower = 100f;
 
     // Use this for initialization
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
         player = FindObjectOfType<PlayerMovement>().transform;
         manager = FindObjectOfType<GameManager>();
     }
@@ -33,11 +34,10 @@ public class FoodMovement : MonoBehaviour
         Vector3 diff = this.transform.position - player.position;
         if (diff.magnitude < 6)
         {
-            //runaway();
+            runaway();
         }
         else
         {
-            anim.SetBool("isWalk", false);
             //patrol
         }
     }
@@ -49,12 +49,18 @@ public class FoodMovement : MonoBehaviour
 
     void runaway()
     {
-        anim.SetBool("isWalk", true);
-        transform.position = Vector3.MoveTowards(transform.position, player.position, -0.1f * Time.deltaTime);
+        isGrounded = false;
+        Vector3 direction = player.position - transform.position;
+        rigid.AddForce(-direction.normalized * runPower * Time.deltaTime);
+        rigid.AddForce(Vector3.up * jumpPower);
+        //transform.position = Vector3.MoveTowards(transform.position, player.position, -0.1f * Time.deltaTime);
     }
 
-    void patrol()
+    private void OnCollisionEnter(Collision other)
     {
-
+        if (other.gameObject.tag == "kitchen")
+        {
+            isGrounded = true;
+        }
     }
 }

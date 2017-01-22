@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour {
         }
 		if(foodTiemr <= 0)
         {
-            spawn(food);
+            //spawn(food);
             //spawnFood();
             foodTiemr = 10f;
         }
@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour {
         if (enemyTimer <= 0)
         {
             spawn(enemies);
-            enemyTimer = 1f;
+            enemyTimer = 10f;
         }
         else
         {
@@ -103,7 +103,7 @@ public class Spawner : MonoBehaviour {
         }
         float posX = Random.Range(chosenTable[0], chosenTable[1]);
         float posZ = Random.Range(chosenTable[2], chosenTable[3]);
-        float index = Random.Range(0, food.Length);
+        float index = Random.Range(0, array.Length);
         GameObject go = (GameObject)Instantiate(array[(int)index], new Vector3(posX, 0.2f, posZ), Quaternion.identity);
     }
 
