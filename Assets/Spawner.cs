@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour {
     {
         float posX = Random.Range(-size, size);
         float posZ = Random.Range(-size, size);
-        float index = Random.Range(0, food.Length);
+        float index = Random.Range(0, enemies.Length);
         GameObject go = (GameObject)Instantiate(enemies[(int)index], new Vector3(posX, 0f, posZ), Quaternion.identity);
     }
 

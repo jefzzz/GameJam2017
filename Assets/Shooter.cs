@@ -13,7 +13,7 @@ public class Shooter : MonoBehaviour {
 
     public bool attackAnimation = false; //accessed by enemies to check when to die (differentiates a door attack vs accidentally bumping into the player's door)
 
-    private bool isOpen = false;
+    public bool isOpen = false;
     private HingeJoint hinge;
 
 
@@ -23,16 +23,16 @@ public class Shooter : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		if(Input.GetKeyDown(KeyCode.LeftControl))
         {
             shoot();
         }
-        if(Input.GetKeyDown(KeyCode.T))
+        if(Input.GetButton("Fire2"))
         {
-            toggleDoor(1f);
+            toggleDoor(3f);
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButton("Fire1"))
         {
             attackAnimation = true;
             attackDoor();
@@ -69,7 +69,7 @@ public class Shooter : MonoBehaviour {
 
     void attackDoor()
     {
-        StartCoroutine(spamDoor(4f, .1f));
+        StartCoroutine(spamDoor(4f, .3f));
     }
 
     IEnumerator spamDoor(float boost, float time)

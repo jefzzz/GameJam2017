@@ -49,7 +49,7 @@ public class EnemyMovement : MonoBehaviour {
         print(other.gameObject.tag);
         if(other.gameObject.tag == "door" && shooter.attackAnimation)
         {
-            Destroy(this.gameObject, 1f);
+            Destroy(this.gameObject, 0.5f);
         }
     }
 
