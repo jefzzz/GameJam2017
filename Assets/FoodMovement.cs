@@ -27,7 +27,7 @@ public class FoodMovement : MonoBehaviour
         Vector3 diff = this.transform.position - player.position;
         if (diff.magnitude < 6)
         {
-            runaway();
+            //runaway();
         }
         else
         {

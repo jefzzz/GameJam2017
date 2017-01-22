@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpScale = 50f;
     public GameObject test;
 
+    public GameObject help;
+    public GameObject power;
 
     private float jumpCount = 0f;
     private float jumpReset = 1.25f;
@@ -61,6 +63,16 @@ public class PlayerMovement : MonoBehaviour {
             jumpCount = jumpReset;
             rigid.AddForce(this.transform.up * jumpScale);
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            toggleHelp();
+        }
+    }
+
+    void toggleHelp()
+    {
+        help.SetActive(!help.activeSelf);
+        power.SetActive(!help.activeSelf);
     }
 
 }
