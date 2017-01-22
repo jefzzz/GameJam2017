@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class stomach : MonoBehaviour {
 
     public Text points;
-    private int count = 0;
+    public int count = 0;
     private Shooter shooter;
 	// Use this for initialization
 	void Start () {

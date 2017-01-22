@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour {
 		if(foodTiemr <= 0)
         {
             spawnFood();
-            foodTiemr = 3f;
+            foodTiemr = 10f;
         }
         else
         {
@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour {
         if (enemyTimer <= 0)
         {
             spawnEnemy();
-            enemyTimer = 5f;
+            enemyTimer = 10f;
         }
         else
         {

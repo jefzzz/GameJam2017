@@ -12,30 +12,37 @@ public class Shooter : MonoBehaviour {
     public float targetVel = 1000f;
 
     public bool attackAnimation = false; //accessed by enemies to check when to die (differentiates a door attack vs accidentally bumping into the player's door)
+    public GameObject particleWave;
 
     public bool isOpen = false;
+    public bool isSpecial = false;
     private HingeJoint hinge;
+    private stomach stomach;
 
 
     // Use this for initialization
     void Start () {
         hinge = door.GetComponent<HingeJoint>();
+        stomach = GetComponentInChildren<stomach>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.LeftControl))
+		if(Input.GetKeyDown(KeyCode.LeftControl) && !isSpecial)
         {
             shoot();
         }
-        if(Input.GetButton("Fire2"))
+        if(Input.GetButtonDown("Fire2") && !isSpecial)
         {
             toggleDoor(3f);
         }
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !isSpecial)
         {
             attackAnimation = true;
             attackDoor();
+        }
+        if(Input.GetKeyDown(KeyCode.X) && !isSpecial) {
+            useUltimate();
         }
     }
 
@@ -44,9 +51,26 @@ public class Shooter : MonoBehaviour {
      * 
      * 
      */
+
+    void useUltimate()
+    {
+        isSpecial = true;
+        toggleDoor(1f);
+        GameObject particle = (GameObject)Instantiate(particleWave, this.transform.position, Quaternion.Euler(this.transform.rotation.eulerAngles + new Vector3(0, 180f, 0)), this.transform);
+        StartCoroutine(playSpecialParticle());
+
+    }
+
+    IEnumerator playSpecialParticle()
+    {
+        yield return new WaitForSeconds(1f);
+        isSpecial = false;
+        toggleDoor(1f);
+    }
+
     void shoot()
     {
-        GameObject bullet = (GameObject)Instantiate(bulletPrefab, firepoint.transform.position, this.transform.rotation);
+        GameObject bullet = (GameObject)Instantiate(bulletPrefab, firepoint.transform.position, Quaternion.Euler(-this.transform.rotation.eulerAngles));
         bullet.GetComponent<Rigidbody>().AddForce(this.transform.forward * 1000f);
     }
 
