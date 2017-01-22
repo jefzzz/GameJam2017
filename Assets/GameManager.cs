@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
     public Text levelText;
     public int level = 0;
     public Spawner spawner;
-    public float timer = 10;
+    public float timer = 60;
     public Text timerText;
     public Text announceText;
 
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
         if(timer <= 0)
         {
             announceLevel();
-            timer = 10f;
+            timer = 60f;
         }
         else
         {

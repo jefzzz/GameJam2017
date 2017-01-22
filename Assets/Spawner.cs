@@ -11,8 +11,13 @@ public class Spawner : MonoBehaviour {
     private float enemyTimer = 0;
     private PlayerMovement player;
     private GameManager manager;
-	// Use this for initialization
-	void Start () {
+
+    private float[] table1 = new float[4] { 2.9f, -1.6f, -4.3f, -2.1f};
+    private float[] table2 = new float[4] { -0.1f, -1.6f, -2.1f, 3.1f};
+    private float[] table3 = new float[4] { 9.5f, -1.6f, 3.1f, 4.8f};
+
+    // Use this for initialization
+    void Start () {
         player = FindObjectOfType<PlayerMovement>();
         manager = FindObjectOfType<GameManager>();
         manager.spawner = this;
@@ -30,8 +35,9 @@ public class Spawner : MonoBehaviour {
         }
 		if(foodTiemr <= 0)
         {
-            spawnFood();
-            foodTiemr = 1f;
+            spawn(food);
+            //spawnFood();
+            foodTiemr = 10f;
         }
         else
         {
@@ -39,8 +45,8 @@ public class Spawner : MonoBehaviour {
         }
         if (enemyTimer <= 0)
         {
-            spawnEnemy();
-            enemyTimer = 10f;
+            spawn(enemies);
+            enemyTimer = 1f;
         }
         else
         {
@@ -79,6 +85,26 @@ public class Spawner : MonoBehaviour {
         float posZ = Random.Range(player.transform.position.z - 10f, player.transform.position.z + 10f);
         float index = Random.Range(0, enemies.Length);
         GameObject go = (GameObject)Instantiate(enemies[(int)index], new Vector3(posX, 0f, posZ), Quaternion.identity);
+    }
+
+    void spawn(GameObject[] array)
+    {
+        int randomTable = (int) Random.Range(0f, 3f);
+        float[] chosenTable;
+        if(randomTable == 0)
+        {
+            chosenTable = table1;
+        } else if (randomTable == 1)
+        {
+            chosenTable = table2;
+        } else
+        {
+            chosenTable = table3;
+        }
+        float posX = Random.Range(chosenTable[0], chosenTable[1]);
+        float posZ = Random.Range(chosenTable[2], chosenTable[3]);
+        float index = Random.Range(0, food.Length);
+        GameObject go = (GameObject)Instantiate(array[(int)index], new Vector3(posX, 0.2f, posZ), Quaternion.identity);
     }
 
 }
