@@ -52,7 +52,7 @@ public class FoodMovement : MonoBehaviour
         isGrounded = false;
         Vector3 direction = player.position - transform.position;
         rigid.AddForce(-direction.normalized * runPower * Time.deltaTime);
-        rigid.AddForce(Vector3.up * jumpPower);
+        rigid.AddForce(Vector3.up * jumpPower * Time.deltaTime);
         //transform.position = Vector3.MoveTowards(transform.position, player.position, -0.1f * Time.deltaTime);
     }
 
