@@ -77,7 +77,7 @@ public class Shooter : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         isSpecial = false;
         toggleDoor(.5f);
-        Destroy(particle);
+        Destroy(particle, 3f);
     }
 
     void shoot()

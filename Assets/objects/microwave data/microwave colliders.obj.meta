@@ -1,22 +1,47 @@
 fileFormatVersion: 2
-guid: a6a5537e0ed3bb848a27e40cb515e48e
-timeCreated: 1484998123
+guid: 27bafb258e1e4284588e680201975e94
+timeCreated: 1485113898
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: default
-    100002: //RootNode
-    100004: Plane.022_Plane.002
-    400000: default
-    400002: //RootNode
-    400004: Plane.022_Plane.002
-    2300000: default
-    2300002: Plane.022_Plane.002
-    3300000: default
-    3300002: Plane.022_Plane.002
-    4300000: default
-    4300002: Plane.022_Plane.002
+    100000: //RootNode
+    100002: Plane.036_Plane.008
+    100004: Plane.037_Plane.026
+    100006: Plane.038_Plane.037
+    100008: Plane.039
+    100010: Plane.040
+    100012: Plane.041
+    100014: Plane.042
+    400000: //RootNode
+    400002: Plane.036_Plane.008
+    400004: Plane.037_Plane.026
+    400006: Plane.038_Plane.037
+    400008: Plane.039
+    400010: Plane.040
+    400012: Plane.041
+    400014: Plane.042
+    2300000: Plane.036_Plane.008
+    2300002: Plane.037_Plane.026
+    2300004: Plane.038_Plane.037
+    2300006: Plane.039
+    2300008: Plane.040
+    2300010: Plane.041
+    2300012: Plane.042
+    3300000: Plane.036_Plane.008
+    3300002: Plane.037_Plane.026
+    3300004: Plane.038_Plane.037
+    3300006: Plane.039
+    3300008: Plane.040
+    3300010: Plane.041
+    3300012: Plane.042
+    4300000: Plane.036_Plane.008
+    4300002: Plane.037_Plane.026
+    4300004: Plane.038_Plane.037
+    4300006: Plane.039
+    4300008: Plane.040
+    4300010: Plane.041
+    4300012: Plane.042
   materials:
     importMaterials: 1
     materialName: 0
@@ -41,7 +66,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.2
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

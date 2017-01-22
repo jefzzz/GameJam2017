@@ -1,22 +1,17 @@
 fileFormatVersion: 2
-guid: a6a5537e0ed3bb848a27e40cb515e48e
-timeCreated: 1484998123
+guid: 807ed01147c42ef46a68c2fe30cd6cff
+timeCreated: 1485117563
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: default
-    100002: //RootNode
-    100004: Plane.022_Plane.002
-    400000: default
-    400002: //RootNode
-    400004: Plane.022_Plane.002
-    2300000: default
-    2300002: Plane.022_Plane.002
-    3300000: default
-    3300002: Plane.022_Plane.002
-    4300000: default
-    4300002: Plane.022_Plane.002
+    100000: //RootNode
+    100002: Plane.043
+    400000: //RootNode
+    400002: Plane.043
+    2300000: Plane.043
+    3300000: Plane.043
+    4300000: Plane.043
   materials:
     importMaterials: 1
     materialName: 0
@@ -41,7 +36,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.2
+    globalScale: 0.3
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

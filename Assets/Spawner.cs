@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
+    public float enemySpawnTimer = 5;
+    public float foodSpawnTimer = 5;
     public int size;
     public GameObject[] food;
     public GameObject[] enemies;
 
-    private float foodTiemr = 0;
+    private float foodTimer = 0;
     private float enemyTimer = 0;
     private PlayerMovement player;
     private GameManager manager;
@@ -33,20 +35,20 @@ public class Spawner : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
-		if(foodTiemr <= 0)
+		if(foodTimer <= 0)
         {
             spawn(food);
             //spawnFood();
-            foodTiemr = 10f;
+            foodTimer = foodSpawnTimer;
         }
         else
         {
-            foodTiemr -= Time.deltaTime;
+            foodTimer -= Time.deltaTime;
         }
         if (enemyTimer <= 0)
         {
             spawn(enemies);
-            enemyTimer = 1f;
+            enemyTimer = enemySpawnTimer;
         }
         else
         {
