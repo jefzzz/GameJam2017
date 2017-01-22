@@ -11,8 +11,11 @@ public class Shooter : MonoBehaviour {
     public GameObject door;
     public float targetVel = 1000f;
 
+    public bool attackAnimation = false; //accessed by enemies to check when to die (differentiates a door attack vs accidentally bumping into the player's door)
+
     private bool isOpen = false;
     private HingeJoint hinge;
+
 
     // Use this for initialization
     void Start () {
@@ -27,9 +30,14 @@ public class Shooter : MonoBehaviour {
         }
         if(Input.GetKeyDown(KeyCode.T))
         {
-            openDoor();
+            toggleDoor(1f);
         }
-	}
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            attackAnimation = true;
+            attackDoor();
+        }
+    }
 
     /* Eat food, whack enemies (forks), get ult to attack multiple enemies at once 
      * 
@@ -42,20 +50,43 @@ public class Shooter : MonoBehaviour {
         bullet.GetComponent<Rigidbody>().AddForce(this.transform.forward * 1000f);
     }
 
-    void openDoor()
+    void toggleDoor(float boostFactor)
     {
         JointMotor motor = hinge.motor;
         if (!isOpen)
         {
-            motor.targetVelocity = targetVel;
+            motor.targetVelocity = targetVel * boostFactor;
             hinge.motor = motor;
             isOpen = true;
         } else
         {
-            motor.targetVelocity = targetVel * -1;
+            motor.targetVelocity = targetVel * -1 * boostFactor;
             hinge.motor = motor;
             isOpen = false;
         }
         //anim.SetBool("isOpen", !anim.GetBool("isOpen"));
+    }
+
+    void attackDoor()
+    {
+        StartCoroutine(spamDoor(4f, .1f));
+    }
+
+    IEnumerator spamDoor(float boost, float time)
+    {
+        toggleDoor(boost);
+        yield return new WaitForSeconds(time);
+        toggleDoor(boost);
+        yield return new WaitForSeconds(time);
+        toggleDoor(boost);
+        yield return new WaitForSeconds(time);
+        toggleDoor(boost);
+        yield return new WaitForSeconds(time);
+        toggleDoor(boost);
+        yield return new WaitForSeconds(time);
+        toggleDoor(boost);
+        yield return new WaitForSeconds(time);
+        attackAnimation = false;
+
     }
 }

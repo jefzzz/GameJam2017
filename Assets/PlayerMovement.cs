@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour {
     public float jumpScale = 50f;
     public GameObject test;
 
+
     private float jumpCount = 0f;
     private float jumpReset = 1.25f;
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             jumpCount -= Time.deltaTime;
         }
+        /*
         if (Input.GetButton("Fire1"))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -28,11 +30,11 @@ public class PlayerMovement : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 1000f))
             {
                 Vector3 target = new Vector3(hit.point.x, 0f, hit.point.z);
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(hit.point.x, 0f, hit.point.z), 2f * Time.deltaTime);
+                //transform.position = Vector3.MoveTowards(transform.position, new Vector3(hit.point.x, 0f, hit.point.z), 2f * Time.deltaTime);
                 transform.LookAt(-target * Time.deltaTime * 2f);
 
             }
-        }
+        }*/
         controls();
 	}
 

@@ -5,8 +5,10 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
     public int size;
     public GameObject[] food;
+    public GameObject[] enemies;
 
-    private float timer = 0;
+    private float foodTiemr = 0;
+    private float enemyTimer = 0;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,24 +16,41 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(timer <= 0)
+		if(foodTiemr <= 0)
         {
             spawnFood();
-            timer = 2f;
+            foodTiemr = 3f;
         }
         else
         {
-            timer -= Time.deltaTime;
+            foodTiemr -= Time.deltaTime;
         }
-        
-	}
+        if (enemyTimer <= 0)
+        {
+            spawnEnemy();
+            enemyTimer = 5f;
+        }
+        else
+        {
+            enemyTimer -= Time.deltaTime;
+        }
+
+    }
 
     void spawnFood()
     {
         float posX = Random.Range(-size, size);
         float posZ = Random.Range(-size, size);
-        float index = Random.Range(0, food.Length - 1);
+        float index = Random.Range(0, food.Length);
         GameObject go = (GameObject)Instantiate(food[(int)index], new Vector3(posX, 0f, posZ), Quaternion.identity);
+    }
+
+    void spawnEnemy()
+    {
+        float posX = Random.Range(-size, size);
+        float posZ = Random.Range(-size, size);
+        float index = Random.Range(0, food.Length);
+        GameObject go = (GameObject)Instantiate(enemies[(int)index], new Vector3(posX, 0f, posZ), Quaternion.identity);
     }
 
 }

@@ -6,12 +6,14 @@ public class EnemyMovement : MonoBehaviour {
     private Rigidbody rigid;
     private Animator anim;
     private Transform player;
+    private Shooter shooter;
 
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         player = FindObjectOfType<PlayerMovement>().transform;
+        shooter = FindObjectOfType<Shooter>();
         anim.SetBool("isWalk", true);
 	}
 	
@@ -23,12 +25,9 @@ public class EnemyMovement : MonoBehaviour {
             //anim.SetTrigger("isHop");
         }
         Vector3 diff = this.transform.position - player.position;
-        if (diff.magnitude < 10)
+        if (diff.magnitude < 20)
         {
-            runaway();
-        } else
-        {
-            //patrol
+            chase();
         }
 	}
 
@@ -37,13 +36,22 @@ public class EnemyMovement : MonoBehaviour {
         rigid.AddForce(this.transform.forward * 100f * Time.deltaTime);
     }
 
-    void runaway()
+    void chase()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, -1f * Time.deltaTime);
+        //Vector3 direction = transform.position - player.position;
+        Vector3 direction = player.position - transform.position;
+        rigid.AddForce(direction.normalized * 100f * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime);
     }
 
-    void patrol()
+    private void OnCollisionEnter(Collision other)
     {
-
+        print(other.gameObject.tag);
+        if(other.gameObject.tag == "door" && shooter.attackAnimation)
+        {
+            Destroy(this.gameObject, 1f);
+        }
     }
+
+
 }

@@ -24,7 +24,7 @@ public class stomach : MonoBehaviour {
         {
             count++;
             points.text = "Points: " + count;
+            Destroy(other.gameObject);
         }
-        Destroy(other);
     }
 }
