@@ -24,7 +24,12 @@ public class GameManager : MonoBehaviour {
 
     void Update()
     {
-        if(isPause)
+        if (player.transform.position.y < -1)
+        {
+            gameOver();
+            return;
+        }
+        if (isPause)
         {
             return;
         }
@@ -40,11 +45,7 @@ public class GameManager : MonoBehaviour {
         }
         timerText.text = "Timer " + timer.ToString("F2");
         print(player.transform.position);
-        if (player.transform.position.y < -1)
-        {
-            gameOver();
-            return;
-        }
+        
     }
 
     public void announceLevel()
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour {
     public void changeLevel()
     {
         level++;
-        levelText.text = "Level: " + level;
+        levelText.text = "Wave: " + level;
         blinkText(levelText);
         clearMobs();
         spawner.spawnMassEnemies(2 * level - 1);    
