@@ -13,10 +13,13 @@ public class GameManager : MonoBehaviour {
     public PlayerMovement player;
     public bool isPause = false;
     public GameObject startOverUI;
+    public int lives = 100;
+    public Text livesUI;
     
 
 	// Use this for initialization
 	void Start () {
+        lives = 100;
         announceLevel();
         spawner = FindObjectOfType<Spawner>();
         player = FindObjectOfType<PlayerMovement>();
@@ -112,11 +115,22 @@ public class GameManager : MonoBehaviour {
         announceText.text = "GAME OVER NOOB";
         announceText.gameObject.SetActive(true);
         startOverUI.SetActive(true);
+        isPause = true;
     }
 
     public void startOver()
     {
         //return to title screen
+    }
+
+    public void loseLife()
+    {
+        lives--;
+        livesUI.text = "Health: " +lives;
+        if (lives == 0)
+        {
+            gameOver();
+        } 
     }
 	
 	
