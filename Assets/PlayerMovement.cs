@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount <= 0)
         {
             jumpCount = jumpReset;
+            isGrounded = false;
             rigid.AddForce(this.transform.up * jumpScale, ForceMode.VelocityChange);
         }
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -82,6 +83,14 @@ public class PlayerMovement : MonoBehaviour {
     {
         help.SetActive(!help.activeSelf);
         power.SetActive(!help.activeSelf);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "kitchen")
+        {
+            isGrounded = true;
+        }
     }
 
 }
