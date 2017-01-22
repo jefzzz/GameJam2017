@@ -41,6 +41,7 @@ public class EnemyMovement : MonoBehaviour {
         //Vector3 direction = transform.position - player.position;
         Vector3 direction = player.position - transform.position;
         rigid.AddForce(direction.normalized * 100f * Time.deltaTime);
+        this.transform.LookAt(player);
         //transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime);
     }
 

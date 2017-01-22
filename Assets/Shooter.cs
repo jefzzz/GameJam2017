@@ -41,7 +41,9 @@ public class Shooter : MonoBehaviour {
             attackAnimation = true;
             attackDoor();
         }
-        if(Input.GetKeyDown(KeyCode.X) && !isSpecial) {
+        if(Input.GetKeyDown(KeyCode.X) && !isSpecial && stomach.count >= 5) {
+            stomach.count = 0;
+            stomach.points.text = "Power: 0/5";
             useUltimate();
         }
     }
@@ -65,7 +67,7 @@ public class Shooter : MonoBehaviour {
         GameObject particle = (GameObject)Instantiate(particleWave, this.transform.position, Quaternion.Euler(this.transform.rotation.eulerAngles + new Vector3(0, 180f, 0)), this.transform);
         yield return new WaitForSeconds(1f);
         isSpecial = false;
-        toggleDoor(1f);
+        toggleDoor(.5f);
         Destroy(particle);
     }
 
@@ -94,7 +96,7 @@ public class Shooter : MonoBehaviour {
 
     void attackDoor()
     {
-        StartCoroutine(spamDoor(4f, .3f));
+        StartCoroutine(spamDoor(4f, .1f));
     }
 
     IEnumerator spamDoor(float boost, float time)

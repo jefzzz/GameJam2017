@@ -9,17 +9,19 @@ public class Spawner : MonoBehaviour {
 
     private float foodTiemr = 0;
     private float enemyTimer = 0;
+    private PlayerMovement player;
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        player = FindObjectOfType<PlayerMovement>();
+        spawnMassFood(200);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		if(foodTiemr <= 0)
         {
             spawnFood();
-            foodTiemr = 10f;
+            foodTiemr = 1f;
         }
         else
         {
@@ -37,18 +39,34 @@ public class Spawner : MonoBehaviour {
 
     }
 
+    void spawnMassFood(int quantity)
+    {
+        for(int i = 0; i< quantity; i++)
+        {
+            spawnFood();
+        }
+    }
+
+    void spawnMassEnemies (int quantity)
+    {
+        for (int i = 0; i < quantity; i++)
+        {
+            spawnEnemy();
+        }
+    }
+
     void spawnFood()
     {
-        float posX = Random.Range(-size, size);
-        float posZ = Random.Range(-size, size);
+        float posX = Random.Range(player.transform.position.x - 5f, player.transform.position.x + 5f);
+        float posZ = Random.Range(player.transform.position.z - 5f, player.transform.position.z + 5f);
         float index = Random.Range(0, food.Length);
         GameObject go = (GameObject)Instantiate(food[(int)index], new Vector3(posX, 0f, posZ), Quaternion.identity);
     }
 
     void spawnEnemy()
     {
-        float posX = Random.Range(-size, size);
-        float posZ = Random.Range(-size, size);
+        float posX = Random.Range(player.transform.position.x - 10f, player.transform.position.x + 10f);
+        float posZ = Random.Range(player.transform.position.z - 10f, player.transform.position.z + 10f);
         float index = Random.Range(0, enemies.Length);
         GameObject go = (GameObject)Instantiate(enemies[(int)index], new Vector3(posX, 0f, posZ), Quaternion.identity);
     }
