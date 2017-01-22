@@ -18,30 +18,36 @@ public class Shooter : MonoBehaviour {
     public bool isSpecial = false;
     private HingeJoint hinge;
     private stomach stomach;
+    private GameManager manager;
 
 
     // Use this for initialization
     void Start () {
         hinge = door.GetComponent<HingeJoint>();
         stomach = GetComponentInChildren<stomach>();
+        manager = FindObjectOfType<GameManager>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.LeftControl) && !isSpecial)
+        if (manager.isPause)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isSpecial)
         {
             shoot();
         }
         if(Input.GetButtonDown("Fire2") && !isSpecial)
         {
-            toggleDoor(3f);
+            toggleDoor(.5f);
         }
         if (Input.GetButtonDown("Fire1") && !isSpecial)
         {
             attackAnimation = true;
             attackDoor();
         }
-        if(Input.GetKeyDown(KeyCode.X) && !isSpecial && stomach.count >= 5) {
+        if(Input.GetKeyDown(KeyCode.X) && !isSpecial) {
             stomach.count = 0;
             stomach.points.text = "Power: 0/5";
             useUltimate();
@@ -57,14 +63,17 @@ public class Shooter : MonoBehaviour {
     void useUltimate()
     {
         isSpecial = true;
-        toggleDoor(1f);
         StartCoroutine(playSpecialParticle());
 
     }
 
     IEnumerator playSpecialParticle()
     {
-        GameObject particle = (GameObject)Instantiate(particleWave, this.transform.position, Quaternion.Euler(this.transform.rotation.eulerAngles + new Vector3(0, 180f, 0)), this.transform);
+        if (!isOpen)
+        {
+            toggleDoor(1f);
+        }
+        GameObject particle = (GameObject)Instantiate(particleWave, this.transform.position+ new Vector3(0, 0.2f, 0), Quaternion.Euler(this.transform.rotation.eulerAngles + new Vector3(0, -180f, 0)), this.transform);
         yield return new WaitForSeconds(1f);
         isSpecial = false;
         toggleDoor(.5f);

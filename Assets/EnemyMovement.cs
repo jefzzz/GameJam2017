@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour {
     private Animator anim;
     private Transform player;
     private Shooter shooter;
+    private GameManager manager;
 
 	// Use this for initialization
 	void Start () {
@@ -14,13 +15,19 @@ public class EnemyMovement : MonoBehaviour {
         anim = GetComponent<Animator>();
         player = FindObjectOfType<PlayerMovement>().transform;
         shooter = FindObjectOfType<Shooter>();
+        manager = FindObjectOfType<GameManager>();
         anim.SetBool("isWalk", true);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (manager.isPause)
+        {
+            return;
+        }
         //moveForward();
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             //anim.SetTrigger("isHop");
         }

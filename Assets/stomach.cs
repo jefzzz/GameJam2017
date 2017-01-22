@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class stomach : MonoBehaviour {
 
     public Text points;
+    public Text scoreText;
     public int count = 0;
+
+    public int score = 0;
     private Shooter shooter;
 	// Use this for initialization
 	void Start () {
@@ -23,6 +26,9 @@ public class stomach : MonoBehaviour {
         if(other.tag == "food" && !shooter.isOpen)
         {
             count++;
+            score++;
+            scoreText.text = "Score: " + score;
+            
             if(count < 5)
             {
                 points.text = "Power: " + count + "/5";

@@ -7,6 +7,7 @@ public class FoodMovement : MonoBehaviour
     private Rigidbody rigid;
     private Animator anim;
     private Transform player;
+    private GameManager manager;
 
     // Use this for initialization
     void Start()
@@ -14,11 +15,16 @@ public class FoodMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         player = FindObjectOfType<PlayerMovement>().transform;
+        manager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(manager.isPause)
+        {
+            return;
+        }
         //moveForward();
         if (Input.GetKeyDown(KeyCode.P))
         {

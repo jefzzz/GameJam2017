@@ -10,14 +10,24 @@ public class Spawner : MonoBehaviour {
     private float foodTiemr = 0;
     private float enemyTimer = 0;
     private PlayerMovement player;
+    private GameManager manager;
 	// Use this for initialization
 	void Start () {
         player = FindObjectOfType<PlayerMovement>();
-        spawnMassFood(200);
+        manager = FindObjectOfType<GameManager>();
+        manager.spawner = this;
     }
 
     // Update is called once per frame
     void Update () {
+        if(manager.isPause)
+        {
+            return;
+        }
+        if(this.transform.position.y < -10)
+        {
+            Destroy(this.gameObject);
+        }
 		if(foodTiemr <= 0)
         {
             spawnFood();
@@ -39,7 +49,7 @@ public class Spawner : MonoBehaviour {
 
     }
 
-    void spawnMassFood(int quantity)
+    public void spawnMassFood(int quantity)
     {
         for(int i = 0; i< quantity; i++)
         {
@@ -47,7 +57,7 @@ public class Spawner : MonoBehaviour {
         }
     }
 
-    void spawnMassEnemies (int quantity)
+    public void spawnMassEnemies (int quantity)
     {
         for (int i = 0; i < quantity; i++)
         {

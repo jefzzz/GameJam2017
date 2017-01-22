@@ -13,13 +13,20 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject help;
     public GameObject power;
 
+    public GameManager  manager;
+
     private float jumpCount = 0f;
     private float jumpReset = 1.25f;
 
 	void Start () {
+        manager = FindObjectOfType<GameManager>();
 	}
 	
 	void FixedUpdate () {
+        if (manager.isPause)
+        {
+            return;
+        }
         if (jumpCount > 0)
         {
             jumpCount -= Time.deltaTime;
