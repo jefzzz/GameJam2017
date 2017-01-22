@@ -56,16 +56,17 @@ public class Shooter : MonoBehaviour {
     {
         isSpecial = true;
         toggleDoor(1f);
-        GameObject particle = (GameObject)Instantiate(particleWave, this.transform.position, Quaternion.Euler(this.transform.rotation.eulerAngles + new Vector3(0, 180f, 0)), this.transform);
         StartCoroutine(playSpecialParticle());
 
     }
 
     IEnumerator playSpecialParticle()
     {
+        GameObject particle = (GameObject)Instantiate(particleWave, this.transform.position, Quaternion.Euler(this.transform.rotation.eulerAngles + new Vector3(0, 180f, 0)), this.transform);
         yield return new WaitForSeconds(1f);
         isSpecial = false;
         toggleDoor(1f);
+        Destroy(particle);
     }
 
     void shoot()
