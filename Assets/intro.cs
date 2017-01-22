@@ -12,7 +12,7 @@ public class intro : MonoBehaviour {
         {
             if (i == size -1)
             {
-                GameObject go = (GameObject)Instantiate(food, location + new Vector3(0, i * 2 + 20, -1), Quaternion.identity);
+                GameObject go = (GameObject)Instantiate(food, location + new Vector3(0, i * 2 + 10, -1), Quaternion.identity);
                 go.transform.localScale = new Vector3(5, 5, 5);
 
             } else

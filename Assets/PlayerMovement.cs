@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour {
     private float jumpCount = 0f;
     private float jumpReset = 1.25f;
 
+    public bool isGrounded = true;
+
 	void Start () {
         manager = FindObjectOfType<GameManager>();
 	}
@@ -51,24 +53,24 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rigid.AddForce(this.transform.forward * forwardScale * Time.deltaTime * -1);
+            rigid.AddForce(this.transform.forward * forwardScale * Time.deltaTime * -1, ForceMode.VelocityChange);
         }
         if(Input.GetKey(KeyCode.S))
         {
-            rigid.AddForce(this.transform.forward * forwardScale * Time.deltaTime);
+            rigid.AddForce(this.transform.forward * forwardScale * Time.deltaTime, ForceMode.VelocityChange);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            rigid.AddRelativeTorque(this.transform.up * rotateScale * Time.deltaTime * -1);
+            rigid.AddRelativeTorque(this.transform.up * rotateScale * Time.deltaTime * -1, ForceMode.VelocityChange);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            rigid.AddRelativeTorque(this.transform.up * rotateScale * Time.deltaTime);
+            rigid.AddRelativeTorque(this.transform.up * rotateScale * Time.deltaTime, ForceMode.VelocityChange);
         }
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount <= 0)
         {
             jumpCount = jumpReset;
-            rigid.AddForce(this.transform.up * jumpScale);
+            rigid.AddForce(this.transform.up * jumpScale, ForceMode.VelocityChange);
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {

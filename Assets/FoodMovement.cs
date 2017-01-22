@@ -11,6 +11,9 @@ public class FoodMovement : MonoBehaviour
     public float jumpPower = 50f;
     public float runPower = 100f;
 
+    public float timer = 0;
+    public float timerMax = 2f;
+
     // Use this for initialization
     void Start()
     {
@@ -26,13 +29,17 @@ public class FoodMovement : MonoBehaviour
         {
             return;
         }
+        if (timer >= 0)
+        {
+            timer -= Time.deltaTime;
+        }
         //moveForward();
         if (Input.GetKeyDown(KeyCode.P))
         {
             //anim.SetTrigger("isHop");
         }
         Vector3 diff = this.transform.position - player.position;
-        if (diff.magnitude < 6)
+        if (diff.magnitude < 6 && isGrounded && timer <= 0)
         {
             runaway();
         }
@@ -42,17 +49,13 @@ public class FoodMovement : MonoBehaviour
         }
     }
 
-    void moveForward()
-    {
-        rigid.AddForce(this.transform.forward * 100f * Time.deltaTime);
-    }
-
     void runaway()
     {
+        timer = timerMax;
         isGrounded = false;
         Vector3 direction = player.position - transform.position;
-        rigid.AddForce(-direction.normalized * runPower * Time.deltaTime);
-        rigid.AddForce(Vector3.up * jumpPower * Time.deltaTime);
+        rigid.AddForce(-direction.normalized * runPower, ForceMode.VelocityChange);
+        rigid.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
         //transform.position = Vector3.MoveTowards(transform.position, player.position, -0.1f * Time.deltaTime);
     }
 
