@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
     public PlayerMovement player;
     public bool isPause = false;
     public GameObject startOverUI;
-    public int lives = 100;
+    public int lives = 1;
     public Text livesUI;
     
 
@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour {
             timer -= Time.deltaTime;
         }
         timerText.text = "Timer " + timer.ToString("F2");
-        print(player.transform.position);
         
     }
 
@@ -112,7 +111,7 @@ public class GameManager : MonoBehaviour {
 
     public void gameOver()
     {
-        announceText.text = "GAME OVER NOOB";
+        announceText.text = "GAME OVER";
         announceText.gameObject.SetActive(true);
         startOverUI.SetActive(true);
         isPause = true;

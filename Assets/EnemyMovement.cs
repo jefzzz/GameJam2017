@@ -67,7 +67,6 @@ public class EnemyMovement : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other)
     {
-        print(other.gameObject.tag);
         if(other.gameObject.tag == "door" && shooter.attackAnimation)
         {
             Vector3 direction = player.position - transform.position;

@@ -31,10 +31,6 @@ public class Spawner : MonoBehaviour {
         {
             return;
         }
-        if(this.transform.position.y < -10)
-        {
-            Destroy(this.gameObject);
-        }
 		if(foodTimer <= 0)
         {
             spawn(food);
@@ -105,8 +101,9 @@ public class Spawner : MonoBehaviour {
         }
         float posX = Random.Range(chosenTable[0], chosenTable[1]);
         float posZ = Random.Range(chosenTable[2], chosenTable[3]);
-        float index = Random.Range(0, food.Length);
-        GameObject go = (GameObject)Instantiate(array[(int)index], new Vector3(posX, 0.2f, posZ), Quaternion.identity);
+        float index = Random.Range(0, array.Length);
+        GameObject go = (GameObject) Instantiate(array[(int)index], new Vector3(posX, 10f, posZ), Quaternion.identity);
+        print(array);
     }
 
 }
