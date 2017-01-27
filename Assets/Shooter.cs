@@ -19,13 +19,14 @@ public class Shooter : MonoBehaviour {
     private HingeJoint hinge;
     private stomach stomach;
     private GameManager manager;
-
+    private PlayerMovement player;
 
     // Use this for initialization
     void Start () {
         hinge = door.GetComponent<HingeJoint>();
         stomach = GetComponentInChildren<stomach>();
         manager = FindObjectOfType<GameManager>();
+        player = GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame
@@ -34,23 +35,25 @@ public class Shooter : MonoBehaviour {
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isSpecial)
-        {
-            shoot();
-        }
         if(Input.GetButtonDown("Fire2") && !isSpecial)
         {
             toggleDoor(.5f);
+            player.audio.clip = player.open;
+            player.audio.Play();
         }
         if (Input.GetButtonDown("Fire1") && !isSpecial)
         {
             attackAnimation = true;
             attackDoor();
+            player.audio.clip = player.attack;
+            player.audio.Play();
         }
-        if(Input.GetKeyDown(KeyCode.X) && !isSpecial && stomach.count >= 5) {
+        if(Input.GetKeyDown(KeyCode.X) && !isSpecial && stomach.count >= 0) {
             stomach.count = 0;
             stomach.points.text = "Power: 0/5";
             useUltimate();
+            player.audio.clip = player.special;
+            player.audio.Play();
         }
     }
 

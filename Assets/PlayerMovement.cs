@@ -20,8 +20,16 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool isGrounded = true;
 
+    public AudioClip jump;
+    public AudioClip special;
+    public AudioClip fall;
+    public AudioClip attack;
+    public AudioClip open;
+    public AudioSource audio;
+
 	void Start () {
         manager = FindObjectOfType<GameManager>();
+        audio = GetComponent<AudioSource>();
 	}
 	
 	void FixedUpdate () {
@@ -72,6 +80,8 @@ public class PlayerMovement : MonoBehaviour {
             jumpCount = jumpReset;
             isGrounded = false;
             rigid.AddForce(this.transform.up * jumpScale, ForceMode.VelocityChange);
+            audio.clip = jump;
+            audio.Play();
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {

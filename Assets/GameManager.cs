@@ -15,13 +15,15 @@ public class GameManager : MonoBehaviour {
     public GameObject startOverUI;
     public int lives = 1;
     public Text livesUI;
-    
+
+    public AudioSource bgm;
 
 	// Use this for initialization
 	void Start () {
         announceLevel();
         spawner = FindObjectOfType<Spawner>();
         player = FindObjectOfType<PlayerMovement>();
+        bgm = GetComponent<AudioSource>();
 	}
 
     void Update()
@@ -79,7 +81,8 @@ public class GameManager : MonoBehaviour {
         levelText.text = "Wave: " + level;
         blinkText(levelText);
         clearMobs();
-        spawner.spawnMassEnemies(2 * level - 1);    
+        spawner.spawnMassEnemies(2 * level - 1);
+        bgm.Play(); 
     }
 
     public void blinkText(Text text)
@@ -114,6 +117,7 @@ public class GameManager : MonoBehaviour {
         announceText.gameObject.SetActive(true);
         startOverUI.SetActive(true);
         isPause = true;
+        bgm.Stop();
     }
 
     public void startOver()

@@ -14,12 +14,15 @@ public class FoodMovement : MonoBehaviour
     public float timer = 0;
     public float timerMax = 2f;
 
+    public AudioSource audio;
+
     // Use this for initialization
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
         player = FindObjectOfType<PlayerMovement>().transform;
         manager = FindObjectOfType<GameManager>();
+        audio = GetComponent<AudioSource>();    
     }
 
     // Update is called once per frame
@@ -42,6 +45,7 @@ public class FoodMovement : MonoBehaviour
         if (diff.magnitude < 6 && isGrounded && timer <= 0)
         {
             runaway();
+            audio.Play();
         }
         else
         {

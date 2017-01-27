@@ -17,12 +17,15 @@ public class EnemyMovement : MonoBehaviour {
     public bool shrinking = false;
     public bool isGrounded = true;
 
+    public AudioSource audio;
+
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody>();
         player = FindObjectOfType<Outlet>().transform;
         shooter = FindObjectOfType<Shooter>();
         manager = FindObjectOfType<GameManager>();
+        audio = GetComponent<AudioSource>();
 
 	}
 	
@@ -49,6 +52,7 @@ public class EnemyMovement : MonoBehaviour {
         if (diff.magnitude < 20 && isGrounded && timer <= 0)
         {
             chase();
+            audio.Play();
         }
 	}
 

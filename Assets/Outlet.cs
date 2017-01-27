@@ -7,11 +7,13 @@ public class Outlet : MonoBehaviour {
     public GameManager manager;
     private Rigidbody rigid;
     private BoxCollider collider;
+    private AudioSource audio;
 	// Use this for initialization
 	void Start () {
         manager = FindObjectOfType<GameManager>();
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
+        audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -24,6 +26,7 @@ public class Outlet : MonoBehaviour {
         {
             return;
         }
+        audio.Play();
         GameObject spark = (GameObject)Instantiate(sparkParticle, this.transform.position, Quaternion.identity, this.transform);
         manager.loseLife();
         Destroy(spark, 2f);
