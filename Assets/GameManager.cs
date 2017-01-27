@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        lives = 100;
         announceLevel();
         spawner = FindObjectOfType<Spawner>();
         player = FindObjectOfType<PlayerMovement>();

@@ -47,7 +47,7 @@ public class Shooter : MonoBehaviour {
             attackAnimation = true;
             attackDoor();
         }
-        if(Input.GetKeyDown(KeyCode.X) && !isSpecial) {
+        if(Input.GetKeyDown(KeyCode.X) && !isSpecial && stomach.count >= 5) {
             stomach.count = 0;
             stomach.points.text = "Power: 0/5";
             useUltimate();

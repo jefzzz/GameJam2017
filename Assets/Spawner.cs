@@ -14,9 +14,9 @@ public class Spawner : MonoBehaviour {
     private PlayerMovement player;
     private GameManager manager;
 
-    private float[] table1 = new float[4] { 2.9f, -1.6f, -4.3f, -2.1f};
-    private float[] table2 = new float[4] { -0.1f, -1.6f, -2.1f, 3.1f};
-    private float[] table3 = new float[4] { 9.5f, -1.6f, 3.1f, 4.8f};
+    private float[] table1 = new float[4] { 2.5f, 0.2f, -4f, -2.5f};
+    private float[] table2 = new float[4] { -0.1f, -1.6f, 0f, 3.1f};
+    private float[] table3 = new float[4] { 0.5f, -1.6f, 3.1f, 4.8f};
 
     // Use this for initialization
     void Start () {
@@ -101,8 +101,8 @@ public class Spawner : MonoBehaviour {
         }
         float posX = Random.Range(chosenTable[0], chosenTable[1]);
         float posZ = Random.Range(chosenTable[2], chosenTable[3]);
-        float index = Random.Range(0, array.Length);
-        GameObject go = (GameObject) Instantiate(array[(int)index], new Vector3(posX, 10f, posZ), Quaternion.identity);
+        float index = Mathf.RoundToInt(Random.Range(0, array.Length));
+        GameObject go = (GameObject) Instantiate(array[(int)index], new Vector3(posX, 5f, posZ), Quaternion.identity);
         print(array);
     }
 
