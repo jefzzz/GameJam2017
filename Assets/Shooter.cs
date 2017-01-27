@@ -46,14 +46,15 @@ public class Shooter : MonoBehaviour {
             attackAnimation = true;
             attackDoor();
             player.audio.clip = player.attack;
-            player.audio.Play();
+            player.audio.PlayOneShot(player.attack);
         }
         if(Input.GetKeyDown(KeyCode.X) && !isSpecial && stomach.count >= 0) {
             stomach.count = 0;
             stomach.points.text = "Power: 0/5";
             useUltimate();
             player.audio.clip = player.special;
-            player.audio.Play();
+            player.audio.PlayOneShot(player.special);
+            player.audio.PlayOneShot(player.zap);
         }
     }
 

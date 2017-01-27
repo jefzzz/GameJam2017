@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour {
     public Text livesUI;
 
     public AudioSource bgm;
+    public AudioClip song;
+    public AudioClip gg;
+
+    private bool isGameOver = false;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +34,11 @@ public class GameManager : MonoBehaviour {
     {
         if (player.transform.position.y < -1)
         {
-            gameOver();
+            if (!isGameOver)
+            {
+                isGameOver = true;
+                gameOver();
+            }
             return;
         }
         if (isPause)
@@ -82,6 +90,7 @@ public class GameManager : MonoBehaviour {
         blinkText(levelText);
         clearMobs();
         spawner.spawnMassEnemies(2 * level - 1);
+        bgm.clip = song;
         bgm.Play(); 
     }
 
@@ -118,6 +127,9 @@ public class GameManager : MonoBehaviour {
         startOverUI.SetActive(true);
         isPause = true;
         bgm.Stop();
+        bgm.clip = gg;
+        bgm.Play();
+
     }
 
     public void startOver()

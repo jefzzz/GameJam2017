@@ -18,6 +18,7 @@ public class EnemyMovement : MonoBehaviour {
     public bool isGrounded = true;
 
     public AudioSource audio;
+    public AudioClip bongg;
 
 	// Use this for initialization
 	void Start () {
@@ -77,6 +78,7 @@ public class EnemyMovement : MonoBehaviour {
             rigid.AddForce(-direction * 100f);
             rigid.AddForce(Vector3.up * 100f);
             shrinking = true;
+            audio.PlayOneShot(bongg);
         }
         if(other.gameObject.tag == "kitchen")
         {

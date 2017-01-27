@@ -26,8 +26,10 @@ public class PlayerMovement : MonoBehaviour {
     public AudioClip attack;
     public AudioClip open;
     public AudioSource audio;
+    public AudioClip zap;
 
-	void Start () {
+
+    void Start () {
         manager = FindObjectOfType<GameManager>();
         audio = GetComponent<AudioSource>();
 	}
@@ -81,7 +83,7 @@ public class PlayerMovement : MonoBehaviour {
             isGrounded = false;
             rigid.AddForce(this.transform.up * jumpScale, ForceMode.VelocityChange);
             audio.clip = jump;
-            audio.Play();
+            audio.PlayOneShot(jump);
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
